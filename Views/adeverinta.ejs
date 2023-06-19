@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Solicitare adeverință</title>
+</head>
+
+<body>
+  <h1>Solicitare adeverință</h1>
+  <form action="/adeverinta" method="POST">
+    <label for="nume">Nume:</label>
+    <input type="text" id="nume" name="nume" required><br>
+
+    <label for="prenume">Prenume:</label>
+    <input type="text" id="prenume" name="prenume" required><br>
+
+    <label for="cnp">CNP:</label>
+    <input type="text" id="cnp" name="cnp" required><br>
+
+    <h2>Informații facultate</h2>
+    <select id="facultate">
+      <option value="Drept și Științe Administrative">Facultatea de Drept și Științe Administrative</option>
+      <option value="Economie, Administratie și Afaceri">Facultatea de Economie, Administratie și Afaceri</option>
+      <option value="Educație Fizică și Sport">Facultatea de Educație Fizică și Sport</option>
+      <option value="Inginerie Alimentară">Facultatea de Inginerie Alimentară</option>
+      <option value="Inginerie Electrică și Știința Calculatoarelor">Facultatea de Inginerie Electrică și Știința
+        Calculatoarelor</option>
+      <option value="Inginerie Mecanică, Autovehicule și Robotica">Facultatea de Inginerie Mecanică, Autovehicule și
+        Robotica</option>
+      <option value="Istorie și Geografie">Facultatea de Istorie și Geografie</option>
+      <option value="Litere și Științe ale Comunicării">Facultatea de Litere și Științe ale Comunicării</option>
+      <option value="Medicină și Științe Biologice">Facultatea de Medicină și Științe Biologice</option>
+      <option value="Silvicultură">Facultatea de Silvicultură</option>
+      <option value="Științe ale Educației">Facultatea de Științe ale Educației</option>
+    </select>
+
+
+
+
+    <button type="submit">Solicită adeverință</button>
+  </form>
+</body>
+
+</html>
