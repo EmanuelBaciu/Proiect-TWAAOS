@@ -4,31 +4,89 @@
 <head>
   <meta charset="utf-8">
   <title>Solicitare adeverință</title>
+
+  <style>
+    html {
+    height: 100%;
+    }
+    body {
+      margin:0;
+      padding:0;
+      font-family: sans-serif;
+      background: linear-gradient(#141e30, #243b55);
+    }
+    .formular-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 650px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+  }
+  .formular-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+  }
+
+  .formular-box label {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+  }
+
+  .formular-box input {
+    align-content: center;
+    background: #e0e0dc;
+  }
+
+  .formular-box input:hover {
+    background: #fff;
+  }
+
+  .formular-box input:focus {
+    background: #fff;
+  }
+
+  .formular-box select {
+  
+  }
+  
+  </style>
+
 </head>
 
 <body>
-  <h1>Solicitare adeverință</h1>
+  <div class="formular-box">
+  <h2>Solicitare adeverință</h2>
   <form action="/adeverinta" method="POST">
     <label for="firstName">Nume:</label>
-    <input type="text" id="firstName" name="firstName" required><br>
+    <input type="text" id="firstName" name="firstName" required><br><br>
 
     <label for="lastName">Prenume:</label>
-    <input type="text" id="lastName" name="lastName" required><br>
+    <input type="text" id="lastName" name="lastName" required><br><br>
 
     <label for="studentID">ID Student:</label>
-    <input type="text" id="studentID" name="studentID" required><br>
+    <input type="text" id="studentID" name="studentID" required><br><br>
 
     <label for="studyYear">An de studiu:</label>
-    <input type="text" id="studyYear" name="studyYear" required><br>
+    <input type="text" id="studyYear" name="studyYear" required><br><br>
 
     <label for="academicYear">An universitar:</label>
-    <input type="text" id="academicYear" name="academicYear" required><br>
+    <input type="text" id="academicYear" name="academicYear" required><br><br>
 
     <label for="studyYears">Durata de studii:</label>
-    <input type="text" id="studyYears" name="studyYears" required><br>
+    <input type="text" id="studyYears" name="studyYears" required><br><br>
 
     <label for="reasonOfIssuing">Adeverinta se elibereaza pentru a-i servi la:</label>
-    <input type="text" id="reasonOfIssuing" name="reasonOfIssuing" required><br>
+    <input type="text" id="reasonOfIssuing" name="reasonOfIssuing" required><br><br>
 
     <label for="faculty">
       <h2>Informații facultate</h2>
@@ -45,11 +103,12 @@
       <option value="FLSC">Facultatea de Litere și Științe ale Comunicării</option>
       <option value="FMSB">Facultatea de Medicină și Științe Biologice</option>
       <option value="FS">Facultatea de Silvicultură</option>
-    </select>
+    </select><br><br>
     <div id="profile-container"></div>
 
-    <button type="submit">Solicită adeverință</button>
+    <br><br><button type="submit">Solicită adeverință</button>
   </form>
+</div>
   <script>
 
     const profileData = {
