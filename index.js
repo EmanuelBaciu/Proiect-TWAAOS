@@ -2,9 +2,22 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-// Rute
+// ====== Rute login ======
 app.get('/', (req, res) => {
   res.sendFile('Login/login.html',{root: __dirname });
+});
+
+app.get('/login.css', (req, res) => {
+  res.sendFile('Login/login.css',{root: __dirname });
+});
+
+// ====== Rute adeverinta ======
+app.get('/adeverinta.js', function(req, res){
+  res.sendFile(__dirname + '/Adeverinta/adeverinta.js');
+});
+
+app.get('/adeverinta.css', function(req, res){
+  res.sendFile(__dirname + '/Adeverinta/adeverinta.css');
 });
 
 // Middleware pentru a analiza datele trimise în corpul cererii

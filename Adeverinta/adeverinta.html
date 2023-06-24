@@ -1,66 +1,9 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-US">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Solicitare adeverință</title>
-
-  <style>
-    html {
-    height: 100%;
-    }
-    body {
-      margin:0;
-      padding:0;
-      font-family: sans-serif;
-      background: linear-gradient(#141e30, #243b55);
-    }
-    .formular-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 800px;
-    height: 650px;
-    padding: 40px;
-    transform: translate(-50%, -50%);
-    background: rgba(0,0,0,.5);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0,0,0,.6);
-    border-radius: 10px;
-  }
-  .formular-box h2 {
-    margin: 0 0 30px;
-    padding: 0;
-    color: #fff;
-    text-align: center;
-  }
-
-  .formular-box label {
-    margin: 0 0 30px;
-    padding: 0;
-    color: #fff;
-    text-align: center;
-  }
-
-  .formular-box input {
-    align-content: center;
-    background: #e0e0dc;
-  }
-
-  .formular-box input:hover {
-    background: #fff;
-  }
-
-  .formular-box input:focus {
-    background: #fff;
-  }
-
-  .formular-box select {
-  
-  }
-  
-  </style>
-
 </head>
 
 <body>
@@ -109,59 +52,9 @@
     <br><br><button type="submit">Solicită adeverință</button>
   </form>
 </div>
-  <script>
 
-    const profileData = {
-      "FEFS": ["Educatie fizica si sportiva", "Kinetoterapie si motricitate speciala", "Nutritie si dietica", "Balneofiziokinetoterapie si recuperare"],
-      "FIA": ["Ingineria produselor alimentare", "Controlul si expertiza produselor alimentare", "Protectia consumatorului si a mediului"],
-      "FIESC": ["Calculatoare", "Automatica si informatica aplicata", "Electornica aplicata", "Managementul energiei", "Sisteme electrice", "Inginerie economica si domeniul electric, electronic si energetic"],
-      "FIM": ["Mecatronica", "Inginerie economica si domeniul mecanic", "Tehnologia constructiilor de masini"],
-      "FIG": ["Geografie", "Geografia turismului", "Istorie", "Relatii internationale si studii europene", "Stiinte politice", "Asistenta sociala"],
-      "FLSC": ["Limba si literatura romana", "Limba si literatura engleza", "Limba si literatura franceza", "Limba si literatura ucraineana", "Comunicare si relatii publice"],
-      "FMSB": ["ProfilA", "ProfilB", "ProfilC"],
-      "FS": ["Silvicultura", "Ecologia si protectia mediului"],
-    };
-
-    const facultateSelect = document.getElementById('faculty');
-    const profileContainer = document.getElementById('profile-container');
-
-    facultateSelect.addEventListener('change', function () {
-      const selectedFacultate = facultateSelect.value;
-      console.log(selectedFacultate);
-
-      const profileList = profileData[selectedFacultate];
-      renderProfiles(profileList);
-    });
-
-    function renderProfiles(profiles) {
-      profileContainer.innerHTML = '';
-      const profileTitle = document.createElement('h2');
-      profileTitle.textContent = "Profile";
-      profileContainer.appendChild(profileTitle);
-
-      const profileSelect = document.createElement('select');
-      profileSelect.required = true;
-      profileSelect.id = 'studyProgram';
-      profileSelect.name = 'studyProgram';
-
-      profileContainer.appendChild(profileSelect)
-
-      const profileSelectDefaultValue = document.createElement('option');
-      profileSelectDefaultValue.disabled = true;
-      profileSelectDefaultValue.selected = true;
-      profileSelectDefaultValue.value = "none";
-      profileSelectDefaultValue.text = "-- Selecteaza un program de studiu --";
-      profileSelect.appendChild(profileSelectDefaultValue);
-
-      profiles.forEach(function (profile) {
-        const profileOption = document.createElement('option');
-        profileOption.value = profile;
-        profileOption.text = profile;
-        profileSelect.appendChild(profileOption);
-      });
-    }
-
-  </script>
+<script src="./adeverinta.js" type="text/javascript"></script>
+<link rel="stylesheet" href="./adeverinta.css">
 </body>
 
 </html>
