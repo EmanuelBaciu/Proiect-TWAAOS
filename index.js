@@ -1,4 +1,5 @@
-import { getAllLogin, getLoginByUsername, insertLogin, con } from "./Database/db.js";
+import { insertLogin, con } from "./Database/db.js";
+import { userData } from "./User/user.js";
 import express, { urlencoded } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -81,6 +82,7 @@ app.post('/login', async (req, res) => {
     });
 
     if (result.length > 0 && username === result[0].USERNAME && password === result[0].PASSWORD) {
+      userData.username = username;
       res.sendFile('Adeverinta/adeverinta.html', { root: __dirname });
     } else {
       res.send('Nume de utilizator sau parola incorecte');
@@ -95,10 +97,10 @@ app.post('/login', async (req, res) => {
 
 // Gestionarea solicitării adeverinței
 app.post('/adeverinta', (req, res) => {
-  const { firstName, lastName, studentID, studyYear, academicYear, studyYears, reasonOfIssuing } = req.body;
+  const { firstName, lastName, studentID, studyYear, academicYear, studyYears, reasonOfIssuing, faculty, studyProgram } = req.body;
 
   res.send(`Adeverința pentru ${firstName} ${lastName} cu id-ul de student ${studentID} a fost solicitată cu succes!`);
-  generateAdeverinta(firstName, lastName, studentID, studyYear, academicYear, studyYears, reasonOfIssuing, "fara facultate").then(() => {
+  generateAdeverinta(firstName, lastName, studentID, studyYear, academicYear, studyYears, reasonOfIssuing, faculty, studyProgram).then(() => {
     console.log("Fișierul PDF a fost generat cu succes!");
   })
     .catch((error) => {
@@ -109,7 +111,7 @@ app.post('/adeverinta', (req, res) => {
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { readFileSync, writeFileSync } from "fs";
 
-async function generateAdeverinta(firstName, lastName, studentID, studyYear, academicYear, studyYears, reasonOfIssuing, faculty) {
+async function generateAdeverinta(firstName, lastName, studentID, studyYear, academicYear, studyYears, reasonOfIssuing, faculty, profile) {
   const path = ""
   const pdfPath = "./Template-Adeverinta/template-adeverinta-student.pdf"; // Înlocuiește cu calea către șablonul PDF
   const pdfBytes = readFileSync(pdfPath);
@@ -125,8 +127,9 @@ async function generateAdeverinta(firstName, lastName, studentID, studyYear, aca
   page.drawText(academicYear, { x: 50, y: 241, font, size: 12 });
   page.drawText(studyYears, { x: 498, y: 241, font, size: 12 });
   page.drawText(reasonOfIssuing, { x: 315, y: 198, font, size: 12 });
-  page.drawText(studentID, { x: 100, y: 60, font, size: 12 });
-  page.drawText(faculty, { x: 100, y: 40, font, size: 12 });
+  page.drawText("ID Student: " + studentID, { x: 450, y: 394, font, size: 12 });
+  page.drawText(faculty, { x: 60, y: 375, font, size: 12 });
+  page.drawText(profile, { x: 60, y: 330, font, size: 12 });
 
   const outputPath = "./Adeverinte-Generate/" + firstName + "_" + lastName + "_" + studentID + ".pdf"; // Înlocuiește cu calea dorită pentru fișierul de ieșire PDF
   const pdfBytesModified = await pdfDoc.save();
