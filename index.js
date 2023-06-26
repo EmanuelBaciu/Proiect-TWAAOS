@@ -3,6 +3,7 @@ import { userData } from "./User/user.js";
 import express, { urlencoded } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -85,11 +86,20 @@ app.post('/login', async (req, res) => {
       userData.username = username;
       res.sendFile('Adeverinta/adeverinta.html', { root: __dirname });
     } else {
-      res.send('Nume de utilizator sau parola incorecte');
+      fs.readFile('./Login/login.html', 'utf8', (err, data) => {
+        if (err) {
+          console.error('Error:', err);
+          res.send('An error occurred. Please try again.');
+          return;
+        }
+
+        const modifiedData = data.replace('</body>', '<script>alert("Nume de utilizator sau parola incorecte !");</script></body>');
+
+        res.send(modifiedData);
+      });
     }
   } catch (error) {
-    console.error('Error:', error);
-    res.send('Nume de utilizator sau parola incorecte');
+    res.send("Nume de utilizator sau parola incorecte !");
   }
 });
 
