@@ -6,13 +6,15 @@ html {
       padding:0;
       font-family: sans-serif;
       background: linear-gradient(#141e30, #243b55);
+      height: 100%;
     }
+  
     .formular-box {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 800px;
-    height: 650px;
+    height: 85%;
     padding: 40px;
     transform: translate(-50%, -50%);
     background: rgba(0,0,0,.5);
@@ -20,6 +22,7 @@ html {
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
   }
+
   .formular-box h2 {
     margin: 0 0 30px;
     padding: 0;
