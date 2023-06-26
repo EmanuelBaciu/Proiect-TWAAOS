@@ -12,7 +12,6 @@ const profileData = {
   const facultateSelect = document.getElementById('faculty');
   const profileContainer = document.getElementById('profile-container');
   const userGreetings = document.getElementById('user-greetings');
-  userGreetings.innerHTML = "Buna, user";
 
   facultateSelect.addEventListener('change', function () {
     const selectedFacultate = facultateSelect.value;

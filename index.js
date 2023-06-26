@@ -5,11 +5,100 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 
+import passport from 'passport';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import session from 'express-session';
+
+import cheerio from 'cheerio';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Configure Google OAuth strategy
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: "455309166115-d3qk3s9mvnhh7qqrd3t138aeuudos5tq.apps.googleusercontent.com",
+      clientSecret: "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",
+      callbackURL: '/auth/google/callback',
+    },
+    (accessToken, refreshToken, profile, done) => {
+      // Handle user authentication and retrieve user information
+      // You can store the user information or perform additional actions here
+      // Read the file content
+      fs.readFile('./Adeverinta/adeverinta.html', 'utf8', (err, data) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        // Load the HTML content using Cheerio
+        const $ = cheerio.load(data);
+
+        // Find the element by its id and modify the text content
+        const element = $("#user-greetings");
+        if (element.length) {
+          element.text("Buna, " + profile.displayName);
+        } else {
+          console.error('Element not found');
+        }
+
+        // Get the modified HTML content
+        const modifiedContent = $.html();
+
+        // Write the modified content back to the file
+        fs.writeFile('./Adeverinta/adeverinta.html', modifiedContent, 'utf8', (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+
+          console.log('Text replaced successfully.');
+        });
+      });
+      console.log(profile);
+      return done(null, profile);
+    }
+  )
+);
+
 const app = express();
+
+app.use(session({
+  secret: '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',
+  resave: true,
+  saveUninitialized: true,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Serialize the user object
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+// Deserialize the user object
+passport.deserializeUser((id, done) => {
+  // Fetch the user object from the database based on the user ID
+  // and pass it to the done() callback
+  done(null, (req, res) => {
+    res.redirect('/adeverinta');
+  });
+});
+
 const port = 3000;
+
+// ====== Rute login Google ======
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    res.redirect('/adeverinta');
+  }
+);
 
 // ====== Rute login ======
 app.get('/', (req, res) => {
@@ -84,7 +173,43 @@ app.post('/login', async (req, res) => {
 
     if (result.length > 0 && username === result[0].USERNAME && password === result[0].PASSWORD) {
       userData.username = username;
-      res.sendFile('Adeverinta/adeverinta.html', { root: __dirname });
+
+      // Read the file content
+      fs.readFile('./Adeverinta/adeverinta.html', 'utf8', (err, data) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        // Load the HTML content using Cheerio
+        const $ = cheerio.load(data);
+
+        // Find the element by its id and modify the text content
+        const element = $("#user-greetings");
+        if (element.length) {
+          element.text("Buna, " + username);
+        } else {
+          console.error('Element not found');
+        }
+
+        // Get the modified HTML content
+        const modifiedContent = $.html();
+
+        // Write the modified content back to the file
+        fs.writeFile('./Adeverinta/adeverinta.html', modifiedContent, 'utf8', (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+
+          console.log('Text replaced successfully.');
+        });
+      });
+
+      setTimeout(() => {
+        res.sendFile('Adeverinta/adeverinta.html', { root: __dirname });
+      }, 1000);
+      
     } else {
       fs.readFile('./Login/login.html', 'utf8', (err, data) => {
         if (err) {
