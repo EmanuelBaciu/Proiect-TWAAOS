@@ -124,7 +124,7 @@ async function generateAdeverinta(firstName, lastName, studentID, studyYear, aca
 
   page.drawText(firstName + " " + lastName, { x: 143, y: 262, font, size: 12, maxWidth: 130 });
   page.drawText(studyYear, { x: 390, y: 262, font, size: 12 });
-  page.drawText(academicYear, { x: 50, y: 241, font, size: 12 });
+  page.drawText(academicYear, { x: 80, y: 241, font, size: 12 });
   page.drawText(studyYears, { x: 498, y: 241, font, size: 12 });
   page.drawText(reasonOfIssuing, { x: 315, y: 198, font, size: 12 });
   page.drawText("ID Student: " + studentID, { x: 450, y: 394, font, size: 12 });

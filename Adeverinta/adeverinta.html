@@ -28,25 +28,25 @@
   <h2>Solicitare adeverință</h2>
   <form action="/adeverinta" method="POST">
     <label for="firstName">Nume:</label>
-    <input type="text" id="firstName" name="firstName" required><br>
+    <input type="text" id="firstName" name="firstName" pattern=".{0,30}" title="Introduceti doar caractere" required><br>
 
     <label for="lastName">Prenume:</label>
-    <input type="text" id="lastName" name="lastName" required><br>
+    <input type="text" id="lastName" name="lastName" pattern=".{0,30}" title="Introduceti doar caractere" required><br>
 
     <label for="studentID">ID Student:</label>
     <input type="text" id="studentID" name="studentID" required><br>
 
     <label for="studyYear">An de studiu:</label>
-    <input type="text" id="studyYear" name="studyYear" required><br>
+    <input type="text" id="studyYear" name="studyYear" pattern="[1-9]" title="Introduceti anul de studiu in care va aflati" required><br>
 
     <label for="academicYear">An universitar:</label>
-    <input type="text" id="academicYear" name="academicYear" required><br>
+    <input type="text" id="academicYear" name="academicYear" pattern="\d{4}" title="Introduceti anul curent format din 4 cifre, ex: 2023" required><br>
 
     <label for="studyYears">Durata de studii:</label>
-    <input type="text" id="studyYears" name="studyYears" required><br>
+    <input type="text" id="studyYears" name="studyYears" pattern="[1-9]" required><br>
 
     <label for="reasonOfIssuing">Adeverinta se elibereaza pentru a-i servi la:</label>
-    <input type="text" id="reasonOfIssuing" name="reasonOfIssuing" required><br>
+    <input type="text" id="reasonOfIssuing" name="reasonOfIssuing" pattern=".{0,30}" title="Introduceti motivul eliberarii adeverintei in maxim 10 caractere" required><br>
 
     <label for="faculty">
       <h2>Informații facultate</h2>
